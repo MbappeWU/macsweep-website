@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
   site: 'https://macsweep.app',
+  base: '/macsweep-website/',
   output: 'static',
   i18n: {
     defaultLocale: 'en',

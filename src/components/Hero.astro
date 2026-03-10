@@ -27,12 +27,12 @@ const { locale } = Astro.props
     <h1 class="reveal reveal-d1 font-bold leading-[1.1] max-w-3xl mx-auto mb-5">
       <span class="text-gradient-section block text-[clamp(48px,6vw,72px)]">MacSweep</span>
     </h1>
-    <p class="reveal reveal-d1 text-[var(--font-size-h2)] font-bold text-[var(--color-text-primary)] max-w-2xl mx-auto mb-5 leading-tight">
+    <p class="reveal reveal-d1 text-[length:var(--font-size-h2)] font-bold text-[var(--color-text-primary)] max-w-2xl mx-auto mb-5 leading-tight">
       {t(locale, 'hero.headline')}
     </p>
 
     <!-- Sub-headline -->
-    <p class="reveal reveal-d2 text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] max-w-xl mx-auto mb-10 leading-relaxed">
+    <p class="reveal reveal-d2 text-[length:var(--font-size-body-lg)] text-[var(--color-text-secondary)] max-w-xl mx-auto mb-10 leading-relaxed">
       {t(locale, 'hero.subheadline')}
     </p>
 
@@ -65,7 +65,7 @@ const { locale } = Astro.props
           <!-- Sidebar -->
           <div class="w-[200px] shrink-0 border-r border-[rgba(255,255,255,0.05)] p-4 hidden md:block">
             <div class="flex items-center gap-2 mb-5">
-              <img src="/macsweep.svg" alt="" width="20" height="20" />
+              <img src={`${import.meta.env.BASE_URL}macsweep.svg`} alt="" width="20" height="20" />
               <span class="text-sm font-medium text-[var(--color-text-primary)]">MacSweep</span>
             </div>
             <p class="text-[10px] font-semibold tracking-wider text-[var(--color-text-muted)] uppercase mb-2">General</p>

@@ -30,13 +30,13 @@ const steps = ['s1', 's2', 's3'] as const
   <section class="py-24 md:py-40">
     <div class="container text-center">
       <div class="flex justify-center mb-8">
-        <img src="/macsweep.svg" alt="MacSweep" width="80" height="80" class="drop-shadow-lg" />
+        <img src={`${import.meta.env.BASE_URL}macsweep.svg`} alt="MacSweep" width="80" height="80" class="drop-shadow-lg" />
       </div>
 
-      <h1 class="text-[var(--font-size-hero)] font-bold mb-4">
+      <h1 class="text-[length:var(--font-size-hero)] font-bold mb-4">
         {t(locale, 'downloadPage.title')}
       </h1>
-      <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] max-w-lg mx-auto mb-8">
+      <p class="text-[length:var(--font-size-body-lg)] text-[var(--color-text-secondary)] max-w-lg mx-auto mb-8">
         {t(locale, 'downloadPage.subtitle')}
       </p>
 

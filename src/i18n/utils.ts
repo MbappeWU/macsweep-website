@@ -36,8 +36,10 @@ export function getLocaleFromUrl(url: URL): Locale {
 
 /** Build a localised path — omits prefix for default locale (en). */
 export function localePath(locale: Locale, path: string): string {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
   const clean = path.startsWith('/') ? path : `/${path}`
-  return locale === 'en' ? clean : `/zh${clean}`
+  const localized = locale === 'en' ? clean : `/zh${clean}`
+  return `${base}${localized}`
 }
 
 /** Map Astro locale to BCP 47 hreflang value. */

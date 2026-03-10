@@ -1,0 +1,28 @@
+---
+/**
+ * DownloadCTA — gradient call-to-action banner.
+ */
+import { t, localePath, type Locale } from '@/i18n/utils'
+
+interface Props { locale: Locale }
+const { locale } = Astro.props
+---
+
+<section class="py-24 md:py-32">
+  <div class="container">
+    <div class="relative overflow-hidden rounded-[var(--radius-xl)] px-8 py-16 md:px-16 md:py-20 text-center">
+      <!-- Gradient background -->
+      <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[#8B5CF6]/20 via-[#3B82F6]/15 to-[#06B6D4]/10 border border-[var(--color-border)] rounded-[var(--radius-xl)]"></div>
+
+      <h2 class="text-[var(--font-size-h2)] font-bold mb-4">
+        {t(locale, 'cta.title')}
+      </h2>
+      <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] mb-8 max-w-lg mx-auto">
+        {t(locale, 'cta.subtitle')}
+      </p>
+      <a href={localePath(locale, '/download')} class="btn-primary">
+        {t(locale, 'cta.button')}
+      </a>
+    </div>
+  </div>
+</section>

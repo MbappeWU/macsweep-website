@@ -1,0 +1,127 @@
+---
+/**
+ * English pricing page — full plan comparison + FAQ.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import DownloadCTA from '@/components/DownloadCTA.astro'
+import { t, localePath } from '@/i18n/utils'
+
+const locale = 'en' as const
+
+const features = [
+  { key: 'cache',     free: true,  pro: true },
+  { key: 'logs',      free: true,  pro: true },
+  { key: 'downloads', free: true,  pro: true },
+  { key: 'devjunk',   free: false, pro: true },
+  { key: 'largefiles',free: false, pro: true },
+  { key: 'leftovers', free: false, pro: true },
+  { key: 'unlimited', free: false, pro: true },
+  { key: 'safety',    free: true,  pro: true },
+  { key: 'auditTrail',free: true,  pro: true },
+] as const
+
+const faqs = ['q1', 'q2', 'q3', 'q4'] as const
+---
+
+<BaseLayout
+  title={t(locale, 'meta.pricing.title')}
+  description={t(locale, 'meta.pricing.description')}
+  locale={locale}
+  canonicalPath="/pricing"
+>
+  <section class="py-24 md:py-32">
+    <div class="container text-center">
+      <h1 class="text-[var(--font-size-hero)] font-bold mb-4">
+        {t(locale, 'pricingPage.title')}
+      </h1>
+      <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] max-w-xl mx-auto mb-16">
+        {t(locale, 'pricingPage.subtitle')}
+      </p>
+
+      <!-- Plan cards (same as homepage but bigger) -->
+      <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-20">
+        <!-- Free -->
+        <div class="glass-panel rounded-[var(--radius-xl)] p-8 text-left">
+          <h2 class="text-xl font-semibold mb-2">{t(locale, 'pricing.free.name')}</h2>
+          <div class="flex items-baseline gap-1 mb-6">
+            <span class="text-4xl font-bold">{t(locale, 'pricing.free.price')}</span>
+            <span class="text-[var(--color-text-muted)] text-sm">{t(locale, 'pricing.free.period')}</span>
+          </div>
+          <a href={localePath(locale, '/download')} class="btn-secondary w-full text-center mb-4">
+            {t(locale, 'pricing.free.cta')}
+          </a>
+        </div>
+
+        <!-- Pro -->
+        <div class="relative glass-panel rounded-[var(--radius-xl)] p-8 text-left border-[var(--color-accent-purple)]/40">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--color-accent-purple)] text-white text-xs font-semibold px-4 py-1 rounded-full">Popular</div>
+          <h2 class="text-xl font-semibold mb-2">{t(locale, 'pricing.pro.name')}</h2>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-4xl font-bold">{t(locale, 'pricing.pro.price')}</span>
+            <span class="text-[var(--color-text-muted)] text-sm">{t(locale, 'pricing.pro.period')}</span>
+          </div>
+          <p class="text-xs text-[var(--color-text-muted)] mb-6">
+            {t(locale, 'pricing.pro.alt.yearly')} · {t(locale, 'pricing.pro.alt.lifetime')}
+          </p>
+          <a href={localePath(locale, '/download')} class="btn-primary w-full text-center mb-4">
+            {t(locale, 'pricing.pro.cta')}
+          </a>
+        </div>
+      </div>
+
+      <!-- Feature comparison table -->
+      <div class="max-w-2xl mx-auto text-left">
+        <h3 class="text-[var(--font-size-h3)] font-semibold text-center mb-8">Feature Comparison</h3>
+        <div class="glass-panel rounded-[var(--radius-lg)] overflow-hidden">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left p-4 text-[var(--color-text-secondary)] font-medium">Feature</th>
+                <th class="text-center p-4 text-[var(--color-text-secondary)] font-medium">{t(locale, 'pricing.free.name')}</th>
+                <th class="text-center p-4 text-[var(--color-accent-purple)] font-medium">{t(locale, 'pricing.pro.name')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {features.map(({ key, free, pro }) => (
+                <tr class="border-b border-[var(--color-border)] last:border-0">
+                  <td class="p-4 text-[var(--color-text-primary)]">{t(locale, `pricingPage.feature.${key}`)}</td>
+                  <td class="p-4 text-center">
+                    {free ? (
+                      <svg class="w-5 h-5 text-[var(--color-accent-green)] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    ) : (
+                      <span class="text-[var(--color-text-muted)]">—</span>
+                    )}
+                  </td>
+                  <td class="p-4 text-center">
+                    <svg class="w-5 h-5 text-[var(--color-accent-purple)] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 md:py-32 bg-[var(--color-bg-secondary)]">
+    <div class="container max-w-2xl">
+      <h2 class="text-[var(--font-size-h2)] font-bold text-center mb-12">
+        {t(locale, 'pricingPage.faq.title')}
+      </h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="glass-panel rounded-[var(--radius-lg)] p-6">
+            <h3 class="font-semibold mb-2">{t(locale, `pricingPage.faq.${faq}`)}</h3>
+            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              {t(locale, `pricingPage.faq.a${faq.slice(1)}` as any)}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <DownloadCTA locale={locale} />
+</BaseLayout>

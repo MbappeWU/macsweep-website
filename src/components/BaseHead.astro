@@ -1,0 +1,62 @@
+---
+/**
+ * BaseHead — injects all SEO meta into <head>.
+ * Receives page-level props from each layout.
+ */
+import { hreflang, localePath, type Locale } from '@/i18n/utils'
+
+interface Props {
+  title: string
+  description: string
+  locale: Locale
+  canonicalPath: string          // e.g. "/" or "/pricing"
+  ogImage?: string               // relative to site root
+}
+
+const { title, description, locale, canonicalPath, ogImage = '/og-image-en.png' } = Astro.props
+const site = Astro.site!.origin   // https://macsweep.app
+const canonical = `${site}${localePath(locale, canonicalPath)}`
+
+const locales: Locale[] = ['en', 'zh']
+---
+
+<!-- Charset & viewport -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Primary SEO -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/macsweep.svg" />
+
+<!-- hreflang alternates -->
+{locales.map((loc) => (
+  <link rel="alternate" hreflang={hreflang(loc)} href={`${site}${localePath(loc, canonicalPath)}`} />
+))}
+<link rel="alternate" hreflang="x-default" href={`${site}${localePath('en', canonicalPath)}`} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={`${site}${ogImage}`} />
+<meta property="og:locale" content={locale === 'zh' ? 'zh_CN' : 'en_US'} />
+<meta property="og:site_name" content="MacSweep" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={`${site}${ogImage}`} />
+
+<!-- Preconnect to Google Fonts (Inter) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>

@@ -1,0 +1,55 @@
+---
+/**
+ * Header — fixed top navigation with language switcher.
+ */
+import { t, localePath, type Locale } from '@/i18n/utils'
+
+interface Props {
+  locale: Locale
+  currentPath: string   // e.g. "/" or "/pricing"
+}
+
+const { locale, currentPath } = Astro.props
+const altLocale: Locale = locale === 'en' ? 'zh' : 'en'
+
+const links = [
+  { key: 'nav.home' as const, path: '/' },
+  { key: 'nav.pricing' as const, path: '/pricing' },
+  { key: 'nav.download' as const, path: '/download' },
+]
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-[var(--color-border)]">
+  <nav class="container flex items-center justify-between h-16">
+    <!-- Logo -->
+    <a href={localePath(locale, '/')} class="flex items-center gap-2 no-underline">
+      <img src="/macsweep.svg" alt="MacSweep" width="28" height="28" />
+      <span class="text-[var(--color-text-primary)] font-semibold text-lg">MacSweep</span>
+    </a>
+
+    <!-- Nav links -->
+    <div class="flex items-center gap-6">
+      {links.map(({ key, path }) => (
+        <a
+          href={localePath(locale, path)}
+          class:list={[
+            'text-sm no-underline transition-colors',
+            currentPath === path
+              ? 'text-[var(--color-text-primary)] font-medium'
+              : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
+          ]}
+        >
+          {t(locale, key)}
+        </a>
+      ))}
+
+      <!-- Language switcher -->
+      <a
+        href={localePath(altLocale, currentPath)}
+        class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline border border-[var(--color-border)] rounded-full px-3 py-1 transition-colors"
+      >
+        {t(locale, 'nav.language')}
+      </a>
+    </div>
+  </nav>
+</header>

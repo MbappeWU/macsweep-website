@@ -1,0 +1,45 @@
+---
+/**
+ * Privacy — "100% Local" section.
+ */
+import { t, type Locale } from '@/i18n/utils'
+
+interface Props { locale: Locale }
+const { locale } = Astro.props
+
+const points = [
+  'privacy.point.local',
+  'privacy.point.noAccount',
+  'privacy.point.noTelemetry',
+  'privacy.point.openSource',
+] as const
+---
+
+<section class="py-24 md:py-32">
+  <div class="container text-center">
+    <!-- Shield icon -->
+    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--color-accent-blue)]/10 mb-6">
+      <svg class="w-8 h-8 text-[var(--color-accent-blue)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+      </svg>
+    </div>
+
+    <h2 class="text-[var(--font-size-h2)] font-bold mb-4">
+      {t(locale, 'privacy.title')}
+    </h2>
+    <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-12 leading-relaxed">
+      {t(locale, 'privacy.subtitle')}
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-4 max-w-xl mx-auto text-left">
+      {points.map((key) => (
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-[var(--color-accent-blue)] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="text-[var(--color-text-secondary)] text-sm">{t(locale, key)}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

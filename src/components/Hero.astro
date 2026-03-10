@@ -1,0 +1,45 @@
+---
+/**
+ * Hero — full-width gradient hero with headline and dual CTAs.
+ */
+import { t, localePath, type Locale } from '@/i18n/utils'
+
+interface Props { locale: Locale }
+const { locale } = Astro.props
+---
+
+<section class="relative overflow-hidden py-32 md:py-40">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#1a103a] via-[var(--color-bg-primary)] to-[var(--color-bg-primary)]"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(139,92,246,0.15),transparent_70%)]"></div>
+  </div>
+
+  <div class="container text-center">
+    <!-- Tagline pill -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--color-border-hover)] bg-[var(--color-surface-glass)] mb-6">
+      <span class="w-2 h-2 rounded-full bg-[var(--color-accent-green)]"></span>
+      <span class="text-sm text-[var(--color-text-secondary)]">{t(locale, 'hero.tagline')}</span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="text-[var(--font-size-hero)] font-bold leading-tight max-w-3xl mx-auto mb-6">
+      <span class="text-gradient">{t(locale, 'hero.headline')}</span>
+    </h1>
+
+    <!-- Sub-headline -->
+    <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed">
+      {t(locale, 'hero.subheadline')}
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href={localePath(locale, '/download')} class="btn-primary">
+        {t(locale, 'hero.cta.download')}
+      </a>
+      <a href={localePath(locale, '/pricing')} class="btn-secondary">
+        {t(locale, 'hero.cta.pricing')}
+      </a>
+    </div>
+  </div>
+</section>

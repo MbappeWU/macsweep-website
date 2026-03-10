@@ -1,0 +1,44 @@
+---
+/**
+ * English home page — MacSweep marketing site.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Hero from '@/components/Hero.astro'
+import SafetyBanner from '@/components/SafetyBanner.astro'
+import Features from '@/components/Features.astro'
+import Privacy from '@/components/Privacy.astro'
+import PricingTable from '@/components/PricingTable.astro'
+import DownloadCTA from '@/components/DownloadCTA.astro'
+import { t } from '@/i18n/utils'
+
+const locale = 'en' as const
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'MacSweep',
+  operatingSystem: 'macOS',
+  applicationCategory: 'UtilitiesApplication',
+  offers: [
+    { '@type': 'Offer', price: '0', priceCurrency: 'USD', name: 'Free' },
+    { '@type': 'Offer', price: '1.99', priceCurrency: 'USD', name: 'Pro Monthly' },
+  ],
+  downloadUrl: 'https://macsweep.app/download',
+  description: t(locale, 'meta.home.description'),
+}
+---
+
+<BaseLayout
+  title={t(locale, 'meta.home.title')}
+  description={t(locale, 'meta.home.description')}
+  locale={locale}
+  canonicalPath="/"
+  jsonLd={jsonLd}
+>
+  <Hero locale={locale} />
+  <SafetyBanner locale={locale} />
+  <Features locale={locale} />
+  <Privacy locale={locale} />
+  <PricingTable locale={locale} />
+  <DownloadCTA locale={locale} />
+</BaseLayout>

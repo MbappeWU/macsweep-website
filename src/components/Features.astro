@@ -1,0 +1,61 @@
+---
+/**
+ * Features — 3×2 glassmorphism card grid for the 6 cleanup modules.
+ */
+import { t, type Locale } from '@/i18n/utils'
+
+interface Props { locale: Locale }
+const { locale } = Astro.props
+
+const modules = [
+  { key: 'cache',     icon: '🗄️', free: true },
+  { key: 'logs',      icon: '📋', free: true },
+  { key: 'downloads', icon: '📥', free: true },
+  { key: 'devjunk',   icon: '🔧', free: false },
+  { key: 'largefiles',icon: '📦', free: false },
+  { key: 'leftovers', icon: '🧹', free: false },
+] as const
+---
+
+<section class="py-24 md:py-32 bg-[var(--color-bg-secondary)]">
+  <div class="container">
+    <!-- Section label -->
+    <div class="text-center mb-4">
+      <span class="text-sm font-medium text-[var(--color-accent-blue)]">
+        {t(locale, 'features.label')}
+      </span>
+    </div>
+
+    <h2 class="text-[var(--font-size-h2)] font-bold text-center mb-4">
+      {t(locale, 'features.title')}
+    </h2>
+    <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] text-center max-w-2xl mx-auto mb-16">
+      {t(locale, 'features.subtitle')}
+    </p>
+
+    <!-- 3×2 Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {modules.map(({ key, icon, free }) => (
+        <div class="glass-panel rounded-[var(--radius-lg)] p-6 transition-transform hover:-translate-y-1">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-3xl">{icon}</span>
+            <span class:list={[
+              'text-xs font-semibold px-2.5 py-0.5 rounded-full',
+              free
+                ? 'bg-[var(--color-accent-green)]/15 text-[var(--color-accent-green)]'
+                : 'bg-[var(--color-accent-purple)]/15 text-[var(--color-accent-purple)]',
+            ]}>
+              {free ? t(locale, 'features.free') : t(locale, 'features.pro')}
+            </span>
+          </div>
+          <h3 class="text-[var(--font-size-body-lg)] font-semibold mb-2">
+            {t(locale, `features.${key}.name`)}
+          </h3>
+          <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+            {t(locale, `features.${key}.desc`)}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

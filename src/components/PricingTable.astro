@@ -1,0 +1,93 @@
+---
+/**
+ * PricingTable — Free vs Pro preview cards (homepage variant).
+ */
+import { t, localePath, type Locale } from '@/i18n/utils'
+
+interface Props { locale: Locale }
+const { locale } = Astro.props
+---
+
+<section class="py-24 md:py-32 bg-[var(--color-bg-secondary)]">
+  <div class="container">
+    <!-- Section label -->
+    <div class="text-center mb-4">
+      <span class="text-sm font-medium text-[var(--color-accent-purple)]">
+        {t(locale, 'pricing.label')}
+      </span>
+    </div>
+
+    <h2 class="text-[var(--font-size-h2)] font-bold text-center mb-4">
+      {t(locale, 'pricing.title')}
+    </h2>
+
+    <!-- Cards -->
+    <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mt-12">
+      <!-- Free -->
+      <div class="glass-panel rounded-[var(--radius-xl)] p-8">
+        <h3 class="text-xl font-semibold mb-2">{t(locale, 'pricing.free.name')}</h3>
+        <div class="flex items-baseline gap-1 mb-6">
+          <span class="text-4xl font-bold">{t(locale, 'pricing.free.price')}</span>
+          <span class="text-[var(--color-text-muted)] text-sm">{t(locale, 'pricing.free.period')}</span>
+        </div>
+        <ul class="space-y-3 mb-8 text-sm text-[var(--color-text-secondary)]">
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[var(--color-accent-green)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            {t(locale, 'pricing.free.modules')}
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[var(--color-accent-green)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            {t(locale, 'pricing.free.limit')}
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[var(--color-accent-green)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            {t(locale, 'pricing.free.safety')}
+          </li>
+        </ul>
+        <a href={localePath(locale, '/download')} class="btn-secondary w-full text-center">
+          {t(locale, 'pricing.free.cta')}
+        </a>
+      </div>
+
+      <!-- Pro -->
+      <div class="relative glass-panel rounded-[var(--radius-xl)] p-8 border-[var(--color-accent-purple)]/40">
+        <!-- Popular badge -->
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--color-accent-purple)] text-white text-xs font-semibold px-4 py-1 rounded-full">
+          Popular
+        </div>
+        <h3 class="text-xl font-semibold mb-2">{t(locale, 'pricing.pro.name')}</h3>
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="text-4xl font-bold">{t(locale, 'pricing.pro.price')}</span>
+          <span class="text-[var(--color-text-muted)] text-sm">{t(locale, 'pricing.pro.period')}</span>
+        </div>
+        <p class="text-xs text-[var(--color-text-muted)] mb-6">
+          {t(locale, 'pricing.pro.alt.yearly')} · {t(locale, 'pricing.pro.alt.lifetime')}
+        </p>
+        <ul class="space-y-3 mb-8 text-sm text-[var(--color-text-secondary)]">
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[var(--color-accent-purple)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            {t(locale, 'pricing.pro.modules')}
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[var(--color-accent-purple)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            {t(locale, 'pricing.pro.unlimited')}
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[var(--color-accent-purple)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            {t(locale, 'pricing.pro.priority')}
+          </li>
+        </ul>
+        <a href={localePath(locale, '/download')} class="btn-primary w-full text-center">
+          {t(locale, 'pricing.pro.cta')}
+        </a>
+      </div>
+    </div>
+
+    <!-- Compare link -->
+    <p class="text-center mt-8">
+      <a href={localePath(locale, '/pricing')} class="text-sm text-[var(--color-accent-purple)] hover:underline">
+        {t(locale, 'pricing.compare')}
+      </a>
+    </p>
+  </div>
+</section>

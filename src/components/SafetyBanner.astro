@@ -1,0 +1,71 @@
+---
+/**
+ * SafetyBanner — Trash-First™ comparison section.
+ */
+import { t, type Locale } from '@/i18n/utils'
+
+interface Props { locale: Locale }
+const { locale } = Astro.props
+
+const points = [
+  'safety.point.audit',
+  'safety.point.history',
+  'safety.point.recovery',
+  'safety.point.noAdmin',
+] as const
+---
+
+<section class="py-24 md:py-32">
+  <div class="container">
+    <!-- Section label -->
+    <div class="text-center mb-4">
+      <span class="text-sm font-medium text-[var(--color-accent-green)]">
+        {t(locale, 'safety.label')}
+      </span>
+    </div>
+
+    <h2 class="text-[var(--font-size-h2)] font-bold text-center mb-4">
+      {t(locale, 'safety.title')}
+    </h2>
+    <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] text-center max-w-2xl mx-auto mb-16">
+      {t(locale, 'safety.subtitle')}
+    </p>
+
+    <!-- Comparison cards -->
+    <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12">
+      <!-- Other tools (dangerous) -->
+      <div class="glass-panel rounded-[var(--radius-lg)] p-6 border-[var(--color-accent-red)]/30">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="w-3 h-3 rounded-full bg-[var(--color-accent-red)]"></span>
+          <span class="text-sm font-medium text-[var(--color-accent-red)]">{t(locale, 'safety.other.label')}</span>
+        </div>
+        <p class="text-[var(--color-text-secondary)] font-mono text-sm">
+          {t(locale, 'safety.other.flow')}
+        </p>
+      </div>
+
+      <!-- MacSweep (safe) -->
+      <div class="glass-panel rounded-[var(--radius-lg)] p-6 border-[var(--color-accent-green)]/30">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="w-3 h-3 rounded-full bg-[var(--color-accent-green)]"></span>
+          <span class="text-sm font-medium text-[var(--color-accent-green)]">{t(locale, 'safety.macsweep.label')}</span>
+        </div>
+        <p class="text-[var(--color-text-secondary)] font-mono text-sm">
+          {t(locale, 'safety.macsweep.flow')}
+        </p>
+      </div>
+    </div>
+
+    <!-- Bullet points -->
+    <div class="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+      {points.map((key) => (
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-[var(--color-accent-green)] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="text-[var(--color-text-secondary)] text-sm">{t(locale, key)}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

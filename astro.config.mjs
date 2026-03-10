@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
-  site: 'https://macsweep.com',
+  site: 'https://arkenage.com',
   base: '/macsweep-website/',
   output: 'static',
   i18n: {

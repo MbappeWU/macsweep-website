@@ -145,7 +145,6 @@ export const en = {
   'footer.privacy': 'Privacy Policy',
   'footer.terms': 'Terms of Service',
   'footer.support': 'Support',
-  'footer.github': 'GitHub',
   'footer.copyright': '© {year} MacSweep. All rights reserved.',
 } as const
 

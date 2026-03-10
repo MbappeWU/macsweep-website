@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
-  site: 'https://macsweep.app',
+  site: 'https://macsweep.com',
   base: '/macsweep-website/',
   output: 'static',
   i18n: {

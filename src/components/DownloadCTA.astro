@@ -33,10 +33,6 @@ const { locale } = Astro.props
 
     <!-- Secondary links -->
     <div class="reveal reveal-d3 flex items-center justify-center gap-4 text-sm mb-8">
-      <a href="https://github.com/macsweep" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-purple)] hover:underline">
-        {locale === 'en' ? 'GitHub Source' : 'GitHub 源码'}
-      </a>
-      <span class="text-[var(--color-text-muted)]">·</span>
       <a href="#" class="text-[var(--color-accent-purple)] hover:underline">
         {locale === 'en' ? 'Release History' : '历史版本'}
       </a>
@@ -44,7 +40,7 @@ const { locale } = Astro.props
 
     <!-- Trust badges -->
     <p class="reveal reveal-d4 text-sm text-[var(--color-text-muted)]">
-      Developer ID {locale === 'en' ? 'Signed' : '签名'} · Apple {locale === 'en' ? 'Notarized' : '公证'} · {locale === 'en' ? 'Open Source & Free' : '开源免费'}
+      Developer ID {locale === 'en' ? 'Signed' : '签名'} · Apple {locale === 'en' ? 'Notarized' : '公证'} · {locale === 'en' ? 'Safe & Free' : '安全且免费'}
     </p>
   </div>
 </section>

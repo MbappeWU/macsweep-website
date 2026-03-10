@@ -144,6 +144,5 @@ export const zh: Record<TranslationKey, string> = {
   'footer.privacy': '隐私政策',
   'footer.terms': '服务条款',
   'footer.support': '支持',
-  'footer.github': 'GitHub',
   'footer.copyright': '© {year} MacSweep. 保留所有权利。',
 }

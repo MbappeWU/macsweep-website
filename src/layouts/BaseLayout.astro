@@ -1,7 +1,6 @@
 ---
 /**
- * BaseLayout — HTML shell wrapping every page.
- * Injects BaseHead, Header, Footer, and optional JSON-LD.
+ * BaseLayout — HTML shell with scroll reveal script.
  */
 import BaseHead from '@/components/BaseHead.astro'
 import Header from '@/components/Header.astro'
@@ -41,5 +40,21 @@ const { title, description, locale, canonicalPath, ogImage, jsonLd } = Astro.pro
       <slot />
     </main>
     <Footer locale={locale} />
+
+    <!-- Scroll reveal (IntersectionObserver, no library) -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

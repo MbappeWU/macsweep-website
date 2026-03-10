@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  /* Font stacks — identical to GUI */
-  --font-display: "Inter", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Font stacks */
+  --font-display: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "SF Mono", "Fira Code", monospace;
 
-  /* Typography scale — web-optimized sizes */
-  --font-size-hero: 56px;
-  --font-size-h2: 36px;
+  /* Typography scale */
+  --font-size-hero: clamp(36px, 5vw, 56px);
+  --font-size-h2: clamp(28px, 3.5vw, 40px);
   --font-size-h3: 24px;
   --font-size-body-lg: 18px;
   --font-size-body: 16px;
   --font-size-sm: 14px;
   --font-size-caption: 12px;
 
-  /* Border radius tokens */
+  /* Border radius */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Colors — from GUI design system */
+  /* Colors */
   --color-bg-primary: #0F1117;
-  --color-bg-secondary: #161922;
+  --color-bg-secondary: #13151d;
   --color-bg-elevated: #1C1F2E;
-  --color-surface-glass: rgba(255, 255, 255, 0.05);
+  --color-surface-glass: rgba(255, 255, 255, 0.04);
 
   --color-text-primary: #F1F5F9;
   --color-text-secondary: #94A3B8;
@@ -39,35 +39,93 @@
   --color-accent-cyan: #06B6D4;
   --color-accent-orange: #F97316;
 
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
 }
 
-/* Glassmorphism panels */
+/* ── Scroll reveal animations ──────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+}
+.reveal.visible {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.reveal-d1.visible { animation-delay: 0.1s; }
+.reveal-d2.visible { animation-delay: 0.2s; }
+.reveal-d3.visible { animation-delay: 0.3s; }
+.reveal-d4.visible { animation-delay: 0.4s; }
+.reveal-d5.visible { animation-delay: 0.5s; }
+
+/* ── Glassmorphism panels ──────────────────────────────── */
 .glass-panel {
-  background: rgba(22, 25, 34, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(22, 25, 34, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-border);
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.glass-panel:hover {
+  border-color: var(--color-border-hover);
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Text gradient utility */
+/* ── Icon containers (matching ArkenAge style) ─────────── */
+.icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+}
+.icon-box svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Text gradient utility ─────────────────────────────── */
 .text-gradient {
-  background: linear-gradient(135deg, #8B5CF6, #3B82F6);
+  background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 40%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-gradient-section {
+  background: linear-gradient(180deg, var(--color-text-primary) 30%, var(--color-text-muted) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Primary gradient button */
+/* ── Tag badge (like "硬编码保护", "可恢复") ──────────────── */
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+/* ── Primary button ────────────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   background: linear-gradient(135deg, #8B5CF6, #6D28D9);
   color: white;
-  padding: 14px 36px;
+  padding: 16px 40px;
   border-radius: var(--radius-full);
   font-weight: 600;
   font-size: var(--font-size-body);
@@ -77,33 +135,79 @@
 }
 .btn-primary:hover {
   opacity: 0.92;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 32px rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(139, 92, 246, 0.45);
 }
 
-/* Secondary outline button */
+/* ── Secondary outline button ──────────────────────────── */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   background: transparent;
   color: var(--color-text-secondary);
-  padding: 14px 36px;
+  padding: 16px 40px;
   border-radius: var(--radius-full);
   font-weight: 600;
   font-size: var(--font-size-body);
   text-decoration: none;
   border: 1px solid var(--color-border-hover);
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition: all 0.2s;
 }
 .btn-secondary:hover {
   color: white;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.25);
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Global body */
+/* ── Large download button (ArkenAge-style) ────────────── */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+  color: white;
+  padding: 20px 56px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: var(--font-size-body-lg);
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 32px rgba(139, 92, 246, 0.35);
+}
+.btn-download:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 48px rgba(139, 92, 246, 0.5);
+}
+
+/* ── macOS mockup window ───────────────────────────────── */
+.macos-window {
+  background: #1a1d2e;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.5),
+    0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+.macos-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* ── Global body ───────────────────────────────────────── */
 body {
   margin: 0;
   background-color: var(--color-bg-primary);
@@ -112,27 +216,25 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Section spacing */
-section {
-  padding: 96px 0;
-}
-
-/* Container */
+/* ── Container ─────────────────────────────────────────── */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
-
 @media (min-width: 768px) {
-  .container {
-    padding: 0 48px;
-  }
+  .container { padding: 0 48px; }
+}
+
+/* ── Selection highlight ───────────────────────────────── */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: white;
 }

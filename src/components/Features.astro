@@ -1,6 +1,6 @@
 ---
 /**
- * Features — 3×2 glassmorphism card grid for the 6 cleanup modules.
+ * Features — 3×2 card grid with colored SVG icons (ArkenAge-style).
  */
 import { t, type Locale } from '@/i18n/utils'
 
@@ -8,45 +8,55 @@ interface Props { locale: Locale }
 const { locale } = Astro.props
 
 const modules = [
-  { key: 'cache',     icon: '🗄️', free: true },
-  { key: 'logs',      icon: '📋', free: true },
-  { key: 'downloads', icon: '📥', free: true },
-  { key: 'devjunk',   icon: '🔧', free: false },
-  { key: 'largefiles',icon: '📦', free: false },
-  { key: 'leftovers', icon: '🧹', free: false },
+  {
+    key: 'cache', free: true,
+    color: '#3B82F6', bg: 'rgba(59,130,246,0.12)',
+    icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
+  },
+  {
+    key: 'leftovers', free: false,
+    color: '#F97316', bg: 'rgba(249,115,22,0.12)',
+    icon: 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16',
+  },
+  {
+    key: 'largefiles', free: false,
+    color: '#F59E0B', bg: 'rgba(245,158,11,0.12)',
+    icon: 'M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4',
+  },
+  {
+    key: 'devjunk', free: false,
+    color: '#10B981', bg: 'rgba(16,185,129,0.12)',
+    icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
+  },
+  {
+    key: 'logs', free: true,
+    color: '#8B5CF6', bg: 'rgba(139,92,246,0.12)',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+  {
+    key: 'downloads', free: true,
+    color: '#F97316', bg: 'rgba(249,115,22,0.12)',
+    icon: 'M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4',
+  },
 ] as const
 ---
 
-<section class="py-24 md:py-32 bg-[var(--color-bg-secondary)]">
+<section class="py-24 md:py-32">
   <div class="container">
-    <!-- Section label -->
-    <div class="text-center mb-4">
-      <span class="text-sm font-medium text-[var(--color-accent-blue)]">
-        {t(locale, 'features.label')}
-      </span>
-    </div>
-
-    <h2 class="text-[var(--font-size-h2)] font-bold text-center mb-4">
+    <h2 class="reveal text-[var(--font-size-h2)] font-bold text-center text-gradient-section mb-4">
       {t(locale, 'features.title')}
     </h2>
-    <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] text-center max-w-2xl mx-auto mb-16">
+    <p class="reveal reveal-d1 text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] text-center max-w-2xl mx-auto mb-16">
       {t(locale, 'features.subtitle')}
     </p>
 
-    <!-- 3×2 Grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {modules.map(({ key, icon, free }) => (
-        <div class="glass-panel rounded-[var(--radius-lg)] p-6 transition-transform hover:-translate-y-1">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-3xl">{icon}</span>
-            <span class:list={[
-              'text-xs font-semibold px-2.5 py-0.5 rounded-full',
-              free
-                ? 'bg-[var(--color-accent-green)]/15 text-[var(--color-accent-green)]'
-                : 'bg-[var(--color-accent-purple)]/15 text-[var(--color-accent-purple)]',
-            ]}>
-              {free ? t(locale, 'features.free') : t(locale, 'features.pro')}
-            </span>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {modules.map(({ key, color, bg, icon }, idx) => (
+        <div class={`reveal reveal-d${Math.min(idx + 1, 5)} glass-panel glass-card rounded-[var(--radius-lg)] p-6`}>
+          <div class="icon-box mb-5" style={`background: ${bg};`}>
+            <svg fill="none" viewBox="0 0 24 24" stroke={color} stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
+            </svg>
           </div>
           <h3 class="text-[var(--font-size-body-lg)] font-semibold mb-2">
             {t(locale, `features.${key}.name`)}

@@ -1,28 +1,50 @@
 ---
 /**
- * DownloadCTA — gradient call-to-action banner.
+ * DownloadCTA — ArkenAge-style download section with file name + trust badges.
  */
-import { t, localePath, type Locale } from '@/i18n/utils'
+import { t, type Locale } from '@/i18n/utils'
 
 interface Props { locale: Locale }
 const { locale } = Astro.props
 ---
 
-<section class="py-24 md:py-32">
-  <div class="container">
-    <div class="relative overflow-hidden rounded-[var(--radius-xl)] px-8 py-16 md:px-16 md:py-20 text-center">
-      <!-- Gradient background -->
-      <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[#8B5CF6]/20 via-[#3B82F6]/15 to-[#06B6D4]/10 border border-[var(--color-border)] rounded-[var(--radius-xl)]"></div>
+<section class="py-24 md:py-36">
+  <div class="container text-center">
+    <h2 class="reveal text-[var(--font-size-h2)] font-bold mb-4">
+      {locale === 'en' ? 'Get Started with MacSweep' : '开始使用 MacSweep'}
+    </h2>
 
-      <h2 class="text-[var(--font-size-h2)] font-bold mb-4">
-        {t(locale, 'cta.title')}
-      </h2>
-      <p class="text-[var(--font-size-body-lg)] text-[var(--color-text-secondary)] mb-8 max-w-lg mx-auto">
-        {t(locale, 'cta.subtitle')}
-      </p>
-      <a href={localePath(locale, '/download')} class="btn-primary">
-        {t(locale, 'cta.button')}
+    <!-- System info -->
+    <div class="reveal reveal-d1 flex items-center justify-center gap-3 text-sm text-[var(--color-text-secondary)] mb-10 flex-wrap">
+      <span class="text-[var(--color-accent-purple)] font-mono border border-[rgba(139,92,246,0.3)] rounded-full px-3 py-0.5">v1.0.0</span>
+      <span>·</span>
+      <span>{locale === 'en' ? 'macOS 12 or later' : 'macOS 12 或更高版本'}</span>
+      <span>·</span>
+      <span>Apple Silicon & Intel</span>
+    </div>
+
+    <!-- Download button with file name -->
+    <div class="reveal reveal-d2 mb-6">
+      <a href="#" class="btn-download">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+        {locale === 'en' ? 'Download MacSweep.dmg' : '下载 MacSweep.dmg'}
       </a>
     </div>
+
+    <!-- Secondary links -->
+    <div class="reveal reveal-d3 flex items-center justify-center gap-4 text-sm mb-8">
+      <a href="https://github.com/macsweep" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-purple)] hover:underline">
+        {locale === 'en' ? 'GitHub Source' : 'GitHub 源码'}
+      </a>
+      <span class="text-[var(--color-text-muted)]">·</span>
+      <a href="#" class="text-[var(--color-accent-purple)] hover:underline">
+        {locale === 'en' ? 'Release History' : '历史版本'}
+      </a>
+    </div>
+
+    <!-- Trust badges -->
+    <p class="reveal reveal-d4 text-sm text-[var(--color-text-muted)]">
+      Developer ID {locale === 'en' ? 'Signed' : '签名'} · Apple {locale === 'en' ? 'Notarized' : '公证'} · {locale === 'en' ? 'Open Source & Free' : '开源免费'}
+    </p>
   </div>
 </section>

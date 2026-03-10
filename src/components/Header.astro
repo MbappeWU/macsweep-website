@@ -1,34 +1,34 @@
 ---
 /**
- * Header — fixed top navigation with language switcher.
+ * Header — fixed navigation matching ArkenAge style.
  */
 import { t, localePath, type Locale } from '@/i18n/utils'
 
 interface Props {
   locale: Locale
-  currentPath: string   // e.g. "/" or "/pricing"
+  currentPath: string
 }
 
 const { locale, currentPath } = Astro.props
 const altLocale: Locale = locale === 'en' ? 'zh' : 'en'
 
 const links = [
-  { key: 'nav.home' as const, path: '/' },
-  { key: 'nav.pricing' as const, path: '/pricing' },
-  { key: 'nav.download' as const, path: '/download' },
+  { key: 'nav.home' as const, path: '/', anchor: '' },
+  { key: 'nav.pricing' as const, path: '/pricing', anchor: '' },
+  { key: 'nav.download' as const, path: '/download', anchor: '' },
 ]
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-[var(--color-border)]">
   <nav class="container flex items-center justify-between h-16">
     <!-- Logo -->
-    <a href={localePath(locale, '/')} class="flex items-center gap-2 no-underline">
-      <img src="/macsweep.svg" alt="MacSweep" width="28" height="28" />
+    <a href={localePath(locale, '/')} class="flex items-center gap-2.5 no-underline">
+      <svg class="w-6 h-6 text-[var(--color-accent-purple)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
       <span class="text-[var(--color-text-primary)] font-semibold text-lg">MacSweep</span>
     </a>
 
     <!-- Nav links -->
-    <div class="flex items-center gap-6">
+    <div class="hidden md:flex items-center gap-8">
       {links.map(({ key, path }) => (
         <a
           href={localePath(locale, path)}
@@ -42,13 +42,38 @@ const links = [
           {t(locale, key)}
         </a>
       ))}
+    </div>
 
-      <!-- Language switcher -->
+    <!-- Right side: language + CTA -->
+    <div class="flex items-center gap-3">
+      <!-- Language toggle -->
+      <div class="flex rounded-full border border-[var(--color-border-hover)] overflow-hidden text-sm">
+        <a
+          href={localePath('zh', currentPath)}
+          class:list={[
+            'px-3 py-1 no-underline transition-colors',
+            locale === 'zh'
+              ? 'bg-[var(--color-accent-purple)] text-white'
+              : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
+          ]}
+        >ZH</a>
+        <a
+          href={localePath('en', currentPath)}
+          class:list={[
+            'px-3 py-1 no-underline transition-colors',
+            locale === 'en'
+              ? 'bg-[var(--color-accent-purple)] text-white'
+              : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
+          ]}
+        >EN</a>
+      </div>
+
+      <!-- CTA button -->
       <a
-        href={localePath(altLocale, currentPath)}
-        class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline border border-[var(--color-border)] rounded-full px-3 py-1 transition-colors"
+        href={localePath(locale, '/download')}
+        class="hidden sm:inline-flex items-center gap-1.5 bg-[var(--color-accent-purple)] text-white text-sm font-medium px-4 py-2 rounded-lg no-underline transition-opacity hover:opacity-90"
       >
-        {t(locale, 'nav.language')}
+        {locale === 'en' ? 'Free Download' : '免费下载'}
       </a>
     </div>
   </nav>

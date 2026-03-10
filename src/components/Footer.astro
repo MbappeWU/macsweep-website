@@ -1,70 +1,31 @@
 ---
 /**
- * Footer — links, copyright, and legal.
+ * Footer — clean single-line (ArkenAge-style).
  */
 import { t, localePath, type Locale } from '@/i18n/utils'
 
-interface Props {
-  locale: Locale
-}
-
+interface Props { locale: Locale }
 const { locale } = Astro.props
 const year = new Date().getFullYear().toString()
 ---
 
-<footer class="border-t border-[var(--color-border)] py-12">
-  <div class="container">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-      <!-- Brand -->
-      <div>
-        <a href={localePath(locale, '/')} class="flex items-center gap-2 no-underline mb-3">
-          <img src="/macsweep.svg" alt="MacSweep" width="24" height="24" />
-          <span class="text-[var(--color-text-primary)] font-semibold">MacSweep</span>
-        </a>
-        <p class="text-[var(--color-text-muted)] text-sm leading-relaxed">
-          Safety-first macOS cleaner.
-        </p>
-      </div>
+<footer class="border-t border-[var(--color-border)] py-8">
+  <div class="container flex flex-col sm:flex-row items-center justify-between gap-4">
+    <!-- Brand -->
+    <a href={localePath(locale, '/')} class="flex items-center gap-2 no-underline">
+      <svg class="w-5 h-5 text-[var(--color-accent-purple)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+      <span class="text-sm text-[var(--color-text-primary)] font-medium">MacSweep</span>
+    </a>
 
-      <!-- Product -->
-      <div>
-        <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">
-          {t(locale, 'footer.product')}
-        </h4>
-        <ul class="list-none p-0 m-0 space-y-2">
-          <li><a href={localePath(locale, '/pricing')} class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline">{t(locale, 'nav.pricing')}</a></li>
-          <li><a href={localePath(locale, '/download')} class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline">{t(locale, 'nav.download')}</a></li>
-        </ul>
-      </div>
-
-      <!-- Resources -->
-      <div>
-        <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">
-          {t(locale, 'footer.resources')}
-        </h4>
-        <ul class="list-none p-0 m-0 space-y-2">
-          <li><a href="mailto:support@macsweep.app" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline">{t(locale, 'footer.support')}</a></li>
-          <li><a href="https://github.com/macsweep" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline">{t(locale, 'footer.github')}</a></li>
-        </ul>
-      </div>
-
-      <!-- Legal -->
-      <div>
-        <h4 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">
-          {t(locale, 'footer.legal')}
-        </h4>
-        <ul class="list-none p-0 m-0 space-y-2">
-          <li><a href="#" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline">{t(locale, 'footer.privacy')}</a></li>
-          <li><a href="#" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline">{t(locale, 'footer.terms')}</a></li>
-        </ul>
-      </div>
+    <!-- Links -->
+    <div class="flex items-center gap-6 text-sm">
+      <a href="#" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline">{t(locale, 'footer.privacy')}</a>
+      <a href="https://github.com/macsweep" target="_blank" rel="noopener noreferrer" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] no-underline">GitHub</a>
     </div>
 
     <!-- Copyright -->
-    <div class="border-t border-[var(--color-border)] pt-6 text-center">
-      <p class="text-sm text-[var(--color-text-muted)]">
-        {t(locale, 'footer.copyright', { year })}
-      </p>
-    </div>
+    <p class="text-sm text-[var(--color-text-muted)]">
+      Copyright 2024-{year} MacSweep. All rights reserved.
+    </p>
   </div>
 </footer>

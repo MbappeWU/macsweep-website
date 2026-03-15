@@ -110,10 +110,10 @@ export const zh: Record<TranslationKey, string> = {
     '可以！免费版包含 3 个模块（缓存、日志、下载），每月 500 MB 清理额度。',
   'pricingPage.faq.q2': '支持哪些付款方式？',
   'pricingPage.faq.a2':
-    'MacSweep 专业版通过 Mac App Store 购买，支持 Apple Pay、信用卡和储值余额。',
+    'MacSweep 专业版通过 Gumroad 购买，支持信用卡和 PayPal。',
   'pricingPage.faq.q3': '可以随时取消吗？',
   'pricingPage.faq.a3':
-    '当然可以。你随时可以在 Apple ID 设置中取消订阅，无需任何理由。',
+    '当然可以。你随时可以在 Gumroad 账户中取消订阅，无需任何理由。',
   'pricingPage.faq.q4': '有买断选项吗？',
   'pricingPage.faq.a4':
     '有 — 一次性支付 ¥198 即可终身使用所有专业版功能。',

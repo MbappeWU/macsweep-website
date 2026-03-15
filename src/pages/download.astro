@@ -42,12 +42,17 @@ const steps = ['s1', 's2', 's3'] as const
       </p>
 
       <!-- Download button -->
-      <a href="#" class="btn-primary text-lg px-10 py-4 mb-4 inline-flex">
+      <a href="https://github.com/MbappeWU/MacSweep/releases/latest/download/MacSweep.dmg" class="btn-primary text-lg px-10 py-4 mb-4 inline-flex">
         {t(locale, 'downloadPage.cta')}
       </a>
-      <p class="text-sm text-[var(--color-text-muted)] mb-20">
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
         {t(locale, 'downloadPage.version')}
       </p>
+
+      <!-- Buy Pro -->
+      <a href="https://arkenage.gumroad.com/l/macsweep-yearly" class="btn-secondary text-base px-8 py-3 mb-20 inline-flex" target="_blank" rel="noopener">
+        Upgrade to Pro — $9.99/year
+      </a>
 
       <!-- Info cards -->
       <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">

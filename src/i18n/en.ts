@@ -111,10 +111,10 @@ export const en = {
     'Yes! The Free plan includes 3 modules (Cache, Logs, Downloads) with a 500 MB monthly cleanup allowance.',
   'pricingPage.faq.q2': 'What payment methods are accepted?',
   'pricingPage.faq.a2':
-    'MacSweep Pro is purchased through the Mac App Store, which accepts Apple Pay, credit cards, and store credit.',
+    'MacSweep Pro is purchased through Gumroad, which accepts credit cards and PayPal.',
   'pricingPage.faq.q3': 'Can I cancel anytime?',
   'pricingPage.faq.a3':
-    'Absolutely. You can cancel your subscription at any time from your Apple ID settings. No questions asked.',
+    'Absolutely. You can cancel your subscription at any time from your Gumroad account. No questions asked.',
   'pricingPage.faq.q4': 'Is there a lifetime option?',
   'pricingPage.faq.a4':
     'Yes — a one-time payment of $29.99 gives you lifetime access to all Pro features.',
